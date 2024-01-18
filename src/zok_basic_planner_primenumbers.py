@@ -1,10 +1,13 @@
 import asyncio
 import os 
+import sys
 import semantic_kernel as sk
 from semantic_kernel.connectors.ai.open_ai.services.open_ai_chat_completion import OpenAIChatCompletion
 from semantic_kernel.planning import BasicPlanner
 from semantic_kernel.connectors.ai.open_ai import AzureChatCompletion, AzureTextEmbedding
-import sys
+# Get the root directory of your project (the directory containing 'src' and 'plugins')
+root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(root_dir)
 from plugins.identify_prime_skill import IdentifyPrime
 
 # Creating the kernel
@@ -60,14 +63,14 @@ args:
 
 planner = BasicPlanner()
 
-while True:
-    number = input("Enter the number which you want to check if it is a prime number:\n\n")
-    basic_plan = asyncio.run(planner.create_plan_async(goal=goal.format(number=number), kernel=kernel,prompt=PROMPT))
-    print("generated plan ",basic_plan.generated_plan)
-    # print("generated prompt ", basic_plan.prompt)
-    # print("generated goal " ,basic_plan.goal)
-    # print("generated str " ,basic_plan.__str__) # THERE IS A DEFECT, RAISED IT TO SEMANTIC KERNEL
 
-    results = asyncio.run(planner.execute_plan_async(basic_plan, kernel))
-    print(results)
+number = input("Enter the number which you want to check if it is a prime number:\n\n")
+basic_plan = asyncio.run(planner.create_plan_async(goal=goal.format(number=number), kernel=kernel,prompt=PROMPT))
+print("generated plan ",basic_plan.generated_plan)
+# print("generated prompt ", basic_plan.prompt)
+# print("generated goal " ,basic_plan.goal)
+# print("generated str " ,basic_plan.__str__) # THERE IS A DEFECT, RAISED IT TO SEMANTIC KERNEL
+
+results = asyncio.run(planner.execute_plan_async(basic_plan, kernel))
+print(results)
 
