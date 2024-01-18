@@ -1,3 +1,6 @@
+# source:
+# https://github.com/microsoft/semantic-kernel/blob/main/python/samples/kernel-syntax-examples/azure_chat_gpt_with_data_api.py
+
 import asyncio
 from typing import Tuple
 import semantic_kernel as sk
